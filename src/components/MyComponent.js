@@ -6,13 +6,16 @@ import DisplayInfor from "./DisplayInfor";
 class MyComponent extends React.Component {
     // JSX
     render() {
-        const myInfor = ['ab', 'ac', 'bc'];
+        const listUsers = [
+            { id: 1, name: "thaothoi", age: 26, company: "secomuns" },
+            { id: 2, name: "thuan chan", age: 21, company: "yep" },
+            { id: 3, name: "thu uyen", age: 23, company: "lotus" },
+        ];
         return (
             <>
                 <UserInfor />
-                <DisplayInfor name="thaothoi" age={26} company="ecommus" />
                 <hr />
-                <DisplayInfor name="thuan chan" age={23} company={"thuy loi"} myInfor={myInfor} />
+                <DisplayInfor listUsers={listUsers} />
             </>
         );
     }
