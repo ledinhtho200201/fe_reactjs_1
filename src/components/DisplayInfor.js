@@ -1,4 +1,5 @@
 import React from "react";
+import './DisplayInfor.scss'
 
 class DisplayInfor extends React.Component {
     state = {
@@ -13,7 +14,7 @@ class DisplayInfor extends React.Component {
     render() {
         const { listUsers } = this.props;
         return (
-            <>
+            <div className="display-infor-container">
                 <div onClick={() => this.handleShowHideUser()} style={{ cursor: 'pointer' }}>
 
                     {this.state.isShowListUser ? "Hide list Users: " : "Show list Users:"}
@@ -34,7 +35,7 @@ class DisplayInfor extends React.Component {
                     </div>
                 }
 
-            </>
+            </div>
             // <p style={{ color: "red" }}>Hello, his name is {name}, age {age} and her company is {company} from Display Infor component</p>
         );
     }
