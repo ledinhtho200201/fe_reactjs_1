@@ -8,7 +8,7 @@ class MyComponent extends React.Component {
     render() {
         const listUsers = [
             { id: 1, name: "thaothoi", age: 26, company: "secomuns" },
-            { id: 2, name: "thuan chan", age: 21, company: "yep" },
+            { id: 2, name: "thuan chan", age: 13, company: "yep" },
             { id: 3, name: "thu uyen", age: 23, company: "lotus" },
         ];
         return (
