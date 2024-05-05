@@ -1,74 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 
-class AddUserInfor extends React.Component {
-    state = {
-        name: '',
-        address: '',
-        age: '',
-        company: ''
-    };
+const AddUserInfor = (props) => {
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [age, setAge] = useState('');
+    const [company, setCompany] = useState('');
 
-    handleClick(event) {
-        console.log("My name is: ", this.state.name)
-        console.log(event.pageX)
-        // react class => merge state
-        this.setState({
-            name: 'thold',
-            age: Math.floor(Math.random() * 100 + 1)
-        })
+    const handleOnChangeInputName = (event) => {
+        setName(event.target.value)
     }
 
-    handleOnMouseOver(event) {
-        console.log("Mouse over my button")
-        console.log(event.pageX)
+    const handleOnChangeInputAge = (event) => {
+        setAge(event.target.value)
     }
 
-    handleOnChangeInput = (event) => {
-        this.setState({
-            name: event.target.value
-        })
+    const handleOnChangeInputAddress = (event) => {
+        setAddress(event.target.value)
     }
 
-    handleOnChangeInputAge = (event) => {
-        this.setState({
-            age: event.target.value
-        })
+    const handleOnChangeInputCompany = (event) => {
+        setCompany(event.target.value)
     }
 
-    handleFormSubmit = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault()
-        console.log('check state from new user: ', this.state)
-        this.props.handleAddNewUser({
+        props.handleAddNewUser({
             id: Math.floor(Math.random() * 100 + 1) + '-random',
-            name: this.state.name,
-            age: this.state.age,
-            company: this.state.company
+            name: name,
+            address: address,
+            age: age,
+            company: company
         })
     }
-
-    render() {
-        return (
-            <>
-                <div>My name is {this.state.name} and I'm from {this.state.age}</div>
-                {/* <button onClick={(event) => { this.handleClick(event) }}>Clink me</button>
-                <button onMouseOver={(event) => { this.handleOnMouseOver(event) }}>Hover me</button> */}
-                <form onSubmit={(event) => { this.handleFormSubmit(event) }}>
-                    <input
-                        value={this.state.name}
-                        onChange={(event) => { this.handleOnChangeInput(event) }}
-                        type="text"
-                    />
-                    <br />
-                    <input
-                        value={this.state.age}
-                        onChange={(event) => { this.handleOnChangeInputAge(event) }}
-                        type="text"
-                    />
-                    <button>Submit</button>
-                </form>
-            </>
-        )
-    }
+    return (
+        <>
+            <div>My name is {name} and I'm from {age}, company is {company} and my address is {address}</div>
+            <form onSubmit={(event) => { handleFormSubmit(event) }}>
+                <label>Name</label>
+                <input
+                    value={name}
+                    onChange={(event) => { handleOnChangeInputName(event) }}
+                    type="text"
+                />
+                <br />
+                <label>Age</label>
+                <input
+                    value={age}
+                    onChange={(event) => { handleOnChangeInputAge(event) }}
+                    type="text"
+                />
+                <br />
+                <label>Address</label>
+                <input
+                    value={address}
+                    onChange={(event) => { handleOnChangeInputAddress(event) }}
+                    type="text"
+                />
+                <br />
+                <label>Company</label>
+                <input
+                    value={company}
+                    onChange={(event) => { handleOnChangeInputCompany(event) }}
+                    type="text"
+                />
+                <br />
+                <button>Submit</button>
+            </form>
+        </>
+    )
 }
 
 export default AddUserInfor;

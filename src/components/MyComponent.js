@@ -1,47 +1,41 @@
 // class component
 // function component
-import React from "react";
+import React, { useState } from "react";
 import AddUserInfor from "./AddUserInfor";
 import DisplayInfor from "./DisplayInfor";
-class MyComponent extends React.Component {
-    state = {
-        listUsers: [
+
+const MyComponent = (props) => {
+    const [listUsers, setListUsers] = useState(
+        [
             { id: 1, name: "thaothoi", age: 26, company: "secomuns" },
             { id: 2, name: "thuan chan", age: 13, company: "yep" },
             { id: 3, name: "thu uyen", age: 23, company: "lotus" },
         ]
-    };
+    )
 
-    handleAddNewUser = (newUser) => {
-        console.log('>>> check param from child: ', newUser)
-        this.setState({
-            listUsers: [newUser, ...this.state.listUsers]
-        })
+    const handleAddNewUser = (newUser) => {
+        console.log('>>> check param from child: ', newUser, 'listusers: ', listUsers)
+        setListUsers([newUser, ...listUsers])
     }
 
-    handleDeleteAUser = (userId) => {
-        let cloneListUsers = this.state.listUsers;
+    const handleDeleteAUser = (userId) => {
+        let cloneListUsers = listUsers;
         cloneListUsers = cloneListUsers.filter(item => item.id !== userId);
-        this.setState({
-            listUsers: cloneListUsers
-        })
+        setListUsers(cloneListUsers)
     }
 
-    // JSX
-    render() {
-        return (
-            <>
-                <AddUserInfor
-                    handleAddNewUser={this.handleAddNewUser}
-                />
-                <hr />
-                <DisplayInfor
-                    listUsers={this.state.listUsers}
-                    handleDeleteAUser={this.handleDeleteAUser}
-                />
-            </>
-        );
-    }
+    return (
+        <>
+            <AddUserInfor
+                handleAddNewUser={handleAddNewUser}
+            />
+            <hr />
+            <DisplayInfor
+                listUsers={listUsers}
+                handleDeleteAUser={handleDeleteAUser}
+            />
+        </>
+    )
 }
 
 export default MyComponent;

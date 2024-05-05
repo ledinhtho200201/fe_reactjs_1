@@ -66,7 +66,6 @@ const DisplayInfor = (props) => {
             }
         </div>
     );
-
 }
 
 export default DisplayInfor;
