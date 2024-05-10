@@ -4,10 +4,13 @@ import { FcPlus } from 'react-icons/fc';
 import TableUser from './TableUser';
 import { useEffect, useState } from "react";
 import { getAllUsers } from '../../../services/apiServices'
+import ModalUpdateUser from './ModalUpdateUser';
 
 const ManageUser = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+    const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [listUsers, setListUsers] = useState([])
+    const [dataUpdate, setDataUpdate] = useState({})
 
     // const handleShowHideModal = (value) => {
     //     setShowModalCreateUser(value);
@@ -24,6 +27,15 @@ const ManageUser = (props) => {
         }
     }
 
+    const handleClickButtonUpdate = (user) => {
+        setShowModalUpdateUser(!showModalUpdateUser)
+        setDataUpdate(user)
+    }
+
+    const resetUpdateDate = () => {
+        setDataUpdate({})
+    }
+
     return (
         <div className="manage-user-container">
             <div className="title">
@@ -35,12 +47,20 @@ const ManageUser = (props) => {
                 </div>
                 <TableUser
                     listUsers={listUsers}
+                    handleClickButtonUpdate={handleClickButtonUpdate}
                 />
                 <ModalCreateUser
                     show={showModalCreateUser}
                     setShow={setShowModalCreateUser}
                     // setShow={handleShowHideModal}
                     fetchListUsers={fetchListUsers}
+                />
+                <ModalUpdateUser
+                    show={showModalUpdateUser}
+                    setShow={setShowModalUpdateUser}
+                    dataUpdate={dataUpdate}
+                    fetchListUsers={fetchListUsers}
+                    resetUpdateDate={resetUpdateDate}
                 />
             </div>
         </div>
