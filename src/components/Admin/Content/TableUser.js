@@ -1,7 +1,7 @@
 
 
 const TableUser = (props) => {
-    const { listUsers, handleClickButtonUpdate } = props
+    const { listUsers, handleClickButtonUpdate, handleClickButtonView, handleClickButtonDelete } = props
 
     return (
         <>
@@ -26,12 +26,19 @@ const TableUser = (props) => {
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
                                         <td>
-                                            <button className="btn btn-secondary">View</button>
+                                            <button className="btn btn-secondary"
+                                                onClick={() => { handleClickButtonView(user) }}>
+                                                View
+                                            </button>
                                             <button className="btn btn-warning mx-3"
                                                 onClick={() => { handleClickButtonUpdate(user) }}>
                                                 Update
                                             </button>
-                                            <button className="btn btn-danger">Delete</button>
+                                            <button className="btn btn-danger"
+                                                onClick={() => { handleClickButtonDelete(user) }}
+                                            >
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 )
