@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import './Login.scss'
-import { postLogin } from '../../services/apiServices';
+import './SignUp.scss'
+import { postRegister } from '../../services/apiServices';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
-const Login = (props) => {
+
+const SignUp = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [showHidePassword, setShowHidePassword] = useState(false);
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -18,7 +22,7 @@ const Login = (props) => {
             );
     };
 
-    const handleLogin = async () => {
+    const handleSignUp = async () => {
         // validate
         const isValidEmail = validateEmail(email);
         console.log('isValidEmail', isValidEmail)
@@ -31,11 +35,11 @@ const Login = (props) => {
             return;
         }
         // submit apis
-        let data = await postLogin(email, password)
+        let data = await postRegister(email, password, username)
         console.log(">>> check data: ", data)
         if (data && data.EC === 0) {
             toast.success(data.EM);
-            navigate("/");
+            navigate("/login");
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM)
@@ -43,38 +47,54 @@ const Login = (props) => {
     }
 
     return (
-        <div className='login-container'>
+        <div className='signup-container'>
             <div className='header '>
-                <span>Don't have an account yet?</span>
-                <button onClick={() => { navigate("/signup") }}>Sign up</button>
+                <span>Already have an account?</span>
+                <button onClick={() => { navigate("/login") }}>Login</button>
             </div>
             <div className='title'>
                 Pildo barkery
             </div>
             <div className='welcome col-4 mx-auto'>
-                Hello, who's this?
+                Start your journey?
             </div>
             <div className='content-form col-4 mx-auto'>
                 <div className='form-group'>
-                    <label>Email</label>
+                    <label>Email (*)</label>
                     <input type={'email'}
                         className='form-control'
                         value={email}
+                        required
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div className='form-group'>
-                    <label>Password</label>
-                    <input type={'password'}
+                <div className='form-group pass-input'>
+                    <label>Password (*)</label>
+                    <input type={
+                        showHidePassword ? "text" : "password"
+                    }
                         className='form-control'
                         value={password}
+                        required
+
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    <span className='show-hide-pass' onClick={() => setShowHidePassword(!showHidePassword)}>
+                        {showHidePassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
                 </div>
-                <span className='forgot-password'>Forgot password ?</span>
+                <div className='form-group'>
+                    <label>Username</label>
+                    <input type={'text'}
+                        className='form-control'
+                        value={username}
+                        required
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
                 <div>
-                    <button className='btn-submit' onClick={() => handleLogin()}>
-                        Login
+                    <button className='btn-submit' onClick={() => handleSignUp()}>
+                        Create my free account
                     </button>
                 </div>
                 <div className='text-center'>
@@ -87,4 +107,4 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+export default SignUp;
