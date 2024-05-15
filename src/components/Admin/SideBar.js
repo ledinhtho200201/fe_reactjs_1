@@ -8,7 +8,7 @@ import {
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
@@ -20,6 +20,7 @@ import './SideBar.scss'
 
 const SideBar = (props) => {
     const { image, collapsed, toggled, handleToggleSidebar } = props;
+    const navigate = useNavigate();
     return (
         <>
             <ProSidebar
@@ -43,7 +44,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <SiReactivex size={'3em'} color='#00bfff' />
-                        Manage Admin
+                        <span onClick={() => navigate('/')}> Manage Admin</span>
                     </div>
                 </SidebarHeader>
 
@@ -63,7 +64,7 @@ const SideBar = (props) => {
                             title="Features"
                         >
                             <MenuItem><Link to="/admins/manage-users">Quản lí Users</Link></MenuItem>
-                            <MenuItem>Quản lí bài Quizz</MenuItem>
+                            <MenuItem><Link to="/admins/manage-quizzes">Quản lí bài Quizz</Link></MenuItem>
                             <MenuItem>Quản lí câu hỏi</MenuItem>
                         </SubMenu>
 
