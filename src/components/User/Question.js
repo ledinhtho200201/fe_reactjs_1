@@ -5,7 +5,12 @@ const Question = (props) => {
     if (_.isEmpty(data)) {
         return (<></>)
     }
-    console.log('check data ques: ', data)
+
+    const handleClickCheckbox = (event, questionId, answerId) => {
+        console.log('qId: ', questionId, 'aId: ', answerId)
+        props.handleCheckbox(questionId, answerId)
+    }
+
     return (
         <>
             {data.image ?
@@ -25,8 +30,8 @@ const Question = (props) => {
                             <div key={`answer-${index}`}
                                 className="a-child">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                    <label class="form-check-label" for="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" checked={a.isSelected} value="" onClick={(event) => handleClickCheckbox(event, data.questionId, a.id)} />
+                                    <label class="form-check-label" >
                                         {a.description}
                                     </label>
                                 </div>

@@ -36,6 +36,7 @@ const DetailQuiz = (props) => {
                             questionDescription = item.description;
                             image = item.image;
                         }
+                        item.answers.isSelected = false;
                         answers.push(item.answers)
                     })
                     return (
@@ -59,6 +60,24 @@ const DetailQuiz = (props) => {
             setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
+    const handleCheckbox = (questionId, answerId) => {
+        let dataQuizClone = _.cloneDeep(dataQuiz); //react hook doesn't merge state
+        let question = dataQuizClone.find(item => +item.questionId === +questionId)
+        if (question && question.answers) {
+            question.answers = question.answers.map(item => {
+                if (+item.id === +answerId) {
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            })
+        }
+        let index = dataQuizClone.findIndex(item => +item.questionId === +questionId)
+        if (index > -1) {
+            dataQuizClone[index] = question;
+            setDataQuiz(dataQuizClone);
+        }
+    }
+
     return (
         <div className="detail-quiz-container">
             <div className="left-content">
@@ -77,6 +96,7 @@ const DetailQuiz = (props) => {
                             dataQuiz[currentQuestionIndex]
                             : []
                         }
+                        handleCheckbox={handleCheckbox}
                     />
                 </div>
                 <div className="footer">
