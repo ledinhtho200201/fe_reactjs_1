@@ -29,9 +29,9 @@ const Question = (props) => {
                         return (
                             <div key={`answer-${index}`}
                                 className="a-child">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked={a.isSelected} value="" onClick={(event) => handleClickCheckbox(event, data.questionId, a.id)} />
-                                    <label class="form-check-label" >
+                                <div className="form-check">
+                                    <input className="form-check-input" type="checkbox" checked={a.isSelected} value="" onClick={(event) => handleClickCheckbox(event, data.questionId, a.id)} />
+                                    <label className="form-check-label" >
                                         {a.description}
                                     </label>
                                 </div>
