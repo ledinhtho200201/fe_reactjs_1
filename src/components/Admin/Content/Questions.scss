@@ -17,25 +17,40 @@
         }
 
         .group-upload {
+            padding-top: 15px;
+
             .label-upload {
-                height       : 30px;
-                border       : 1px solid red;
-                margin-right : 5px;
-                border-radius: 5px;
-                padding      : 0 15px;
+                cursor      : pointer;
+                color       : #9068ff;
+                margin-right: 5px;
+                font-size   : 25px;
+
+                &:hover {
+                    color: #4400ff;
+                }
             }
         }
 
         .btn-add {
             .icon-add {
-                font-size: 30px;
-                color    : red
+                font-size: 25px;
+                color    : #2996ff;
+                cursor   : pointer;
+
+                &:hover {
+                    color: #0989ff;
+                }
             }
 
             .icon-remove {
                 margin-left: 10px;
-                font-size  : 30px;
-                color      : green
+                font-size  : 25px;
+                color      : #e8771c;
+                cursor     : pointer;
+
+                &:hover {
+                    color: #ff7608;
+                }
             }
         }
     }
@@ -56,14 +71,24 @@
 
         .btn-group {
             .icon-add {
-                font-size: 30px;
-                color    : red
+                font-size: 25px;
+                color    : #2996ff;
+                cursor   : pointer;
+
+                &:hover {
+                    color: #0989ff;
+                }
             }
 
             .icon-remove {
                 margin-left: 10px;
-                font-size  : 30px;
-                color      : green
+                font-size  : 25px;
+                color      : #e8771c;
+                cursor     : pointer;
+
+                &:hover {
+                    color: #ff7608;
+                }
             }
         }
     }
