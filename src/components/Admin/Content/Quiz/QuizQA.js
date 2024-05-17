@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import './Questions.scss';
+import './QuizQA.scss';
 import { BsBagPlusFill } from "react-icons/bs";
 import { BsPatchMinusFill } from "react-icons/bs";
 import { AiOutlineMinusCircle } from "react-icons/ai";
@@ -9,12 +9,12 @@ import { FiUpload } from "react-icons/fi";
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import Lightbox from "react-awesome-lightbox";
-import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } from "../../../services/apiServices";
+import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } from "../../../../services/apiServices";
 import { toast } from 'react-toastify';
 
 
 
-const Questions = (props) => {
+const QuizQA = (props) => {
     const initQuestions = [
         {
             id: uuidv4(),
@@ -222,10 +222,6 @@ const Questions = (props) => {
 
     return (
         <div className="questions-container" >
-            <div className="title">
-                Manage Questions
-            </div>
-            <hr />
             <div className="add-new-queston">
                 <div className='col-6 form-group mb-2'>
                     <label>Select Quiz: </label>
@@ -342,4 +338,4 @@ const Questions = (props) => {
     )
 }
 
-export default Questions;
+export default QuizQA;

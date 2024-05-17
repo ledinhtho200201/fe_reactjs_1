@@ -14,7 +14,7 @@ import SignUp from "./components/Auth/SignUp";
 import ListQuiz from "./components/User/ListQuiz";
 import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
-import Questions from "./components/Admin/Content/Questions";
+import Questions from "./components/Admin/Content/Question/Questions";
 
 const NotFound = () => {
     return (
