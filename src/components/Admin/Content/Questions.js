@@ -10,38 +10,30 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import Lightbox from "react-awesome-lightbox";
 import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } from "../../../services/apiServices";
+import { toast } from 'react-toastify';
 
 
 
 const Questions = (props) => {
-    const [questions, setQuestions] = useState([
+    const initQuestions = [
         {
             id: uuidv4(),
             description: '',
             imageFile: '',
             imageName: '',
+            // isInvalid: false,
             answers: [
                 {
                     id: uuidv4(),
                     description: '',
-                    isCorrect: false
-                }
-            ]
-        },
-        {
-            id: uuidv4(),
-            description: '',
-            imageFile: '',
-            imageName: '',
-            answers: [
-                {
-                    id: uuidv4(),
-                    description: 'answer 2',
-                    isCorrect: false
+                    isCorrect: false,
+                    // isInvalid: false
                 }
             ]
         }
-    ]);
+    ];
+
+    const [questions, setQuestions] = useState(initQuestions);
 
     const [dataImagePreview, setDataImagePreview] = useState({
         title: '',
@@ -160,22 +152,60 @@ const Questions = (props) => {
     }
 
     const handleSubmitQuestionForQuiz = async () => {
-        // todo
+        // todo    
         // validate data
+        if (_.isEmpty(selectedQuiz)) {
+            toast.error("Please choose a Quiz!")
+            return;
+        }
 
+        // validate answer
+        let isValidAnswer = true;
+        let indexQ = 0, indexA = 0;
+        for (let i = 0; i < questions.length; i++) {
+            for (let j = 0; j < questions[i].answers.length; j++) {
+                if (!questions[i].answers[j].description) {
+                    isValidAnswer = false;
+                    indexA = j;
+                    break;
+                }
+            }
+            indexQ = i;
+            if (isValidAnswer === false) break;
+        }
 
-        console.log('question: ', questions, 'selected quiz', selectedQuiz)
+        if (isValidAnswer === false) {
+            toast.error(`Not empty Answer ${indexA + 1} at Question ${indexQ + 1}`)
+            return;
+        }
+        // validate question
+        let isValidQuestion = true;
+        let indexQ1 = 0;
+        for (let i = 0; i < questions.length; i++) {
+            if (!questions[i].description) {
+                isValidQuestion = false;
+                indexQ1 = i;
+                break;
+            }
+        }
+        if (isValidQuestion === false) {
+            toast.error(`Not empty description for Question ${indexQ1 + 1}`)
+            return;
+        }
+
         // submit question
-        await Promise.all(questions.map(async (question) => {
+        for (const question of questions) {
             const resQuestions = await postCreateNewQuestionForQuiz(
                 +selectedQuiz.value,
                 question.description,
                 question.imageFile);
             // submit answer
-            await Promise.all(question.answers.map(async (answer) => {
+            for (const answer of question.answers) {
                 await postCreateNewAnswerForQuestion(answer.description, answer.isCorrect, resQuestions.DT.id)
-            }))
-        }))
+            }
+        }
+        toast.success('Create questions and answer success!');
+        setQuestions(initQuestions);
     }
 
     const handlePreviewImage = (questionId) => {
@@ -218,9 +248,10 @@ const Questions = (props) => {
                                             className="form-control"
                                             placeholder="name@example.com"
                                             value={question.description}
+
                                             onChange={(event) => handleOnChange('QUESTION', question.id, event.target.value)}
                                         />
-                                        <label>Question {index + 1}'s' description</label>
+                                        <label>Question {index + 1}'s description</label>
                                     </div>
                                     <div className='group-upload'>
                                         <label htmlFor={`${question.id}`}><FiUpload className='label-upload' /></label>
