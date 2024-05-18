@@ -5,7 +5,7 @@ import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalResult from "./ModalResult";
-import RightContent from "./RightContent.js/RightContent";
+import RightContent from "./Content/RightContent";
 
 const DetailQuiz = (props) => {
     const params = useParams();
@@ -15,9 +15,7 @@ const DetailQuiz = (props) => {
     const [dataQuiz, setDataQuiz] = useState([])
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [isShowModalResult, setIsShowModalResult] = useState(false);
-    const [dataModalResult, setDataModalResult] = useState({
-
-    })
+    const [dataModalResult, setDataModalResult] = useState({})
 
     useEffect(() => {
         fetchQuestions()
@@ -150,6 +148,7 @@ const DetailQuiz = (props) => {
             <div className="right-content">
                 <RightContent
                     dataQuiz={dataQuiz}
+                    handleFinishQuiz={handleFinishQuiz}
                 />
 
             </div>
