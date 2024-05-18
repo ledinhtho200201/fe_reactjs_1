@@ -82,6 +82,14 @@
                 &:hover {
                     color: red;
                 }
+
+                &.selected {
+                    background-color: #60afc7;
+                }
+
+                &.clicked {
+                    color: red;
+                }
             }
         }
     }
