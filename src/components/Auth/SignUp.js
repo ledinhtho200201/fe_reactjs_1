@@ -4,6 +4,7 @@ import { postRegister } from '../../services/apiServices';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Language from '../Header/Language';
 
 
 
@@ -51,6 +52,7 @@ const SignUp = (props) => {
             <div className='header '>
                 <span>Already have an account?</span>
                 <button onClick={() => { navigate("/login") }}>Login</button>
+                <Language />
             </div>
             <div className='title'>
                 Pildo barkery

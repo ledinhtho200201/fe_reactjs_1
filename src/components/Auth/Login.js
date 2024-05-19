@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
 import { ImSpinner3 } from "react-icons/im";
+import Language from '../Header/Language';
 
 
 const Login = (props) => {
@@ -61,6 +62,7 @@ const Login = (props) => {
             <div className='header '>
                 <span>Don't have an account yet?</span>
                 <button onClick={() => { navigate("/signup") }}>Sign up</button>
+                <Language />
             </div>
             <div className='title'>
                 Pildo barkery
